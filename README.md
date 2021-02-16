@@ -72,7 +72,7 @@ qsub ./script/singularity_minimap2.sh
 以下で投入
 
 ```
-run_nanopolish.sh
+bash run_nanopolish.sh
 ```
 
 4. medaka
@@ -80,7 +80,7 @@ run_nanopolish.sh
 以下で投入
 
 ```
-qsub run_medaka_cpu.sh
+bash run_medaka_cpu.sh
 ```
 
 5. whatshap phase
@@ -88,7 +88,7 @@ qsub run_medaka_cpu.sh
 以下で投入
 
 ```
-qsub run_whatshap_phase.sh
+bash run_whatshap_phase.sh
 ```
 
 6. whatshap haplotag
