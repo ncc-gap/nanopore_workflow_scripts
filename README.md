@@ -57,6 +57,7 @@ sample1_normal
  - singularity_medaka_cpu.sh
  - singularity_minimap2.sh
  - singularity_whatshap_phase.sh
+```
 
 2. minimap2
 
