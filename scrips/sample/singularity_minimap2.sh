@@ -1,16 +1,16 @@
 #!/bin/bash -x
 #$ -S /bin/bash
 #$ -cwd
-#$ -o /home/aiokada/nanopore/log/COLO829
-#$ -e /home/aiokada/nanopore/log/COLO829
-#$ -l s_vmem=32G,mem_req=32G
+#$ -o /home/aokada/nanopore/log/SAMN13152502
+#$ -e /home/aokada/nanopore/log/SAMN13152502
+#$ -l s_vmem=32G
 
-SAMPLE=COLO829
+SAMPLE=SAMN13152502
 
-IMAGE=/home/aiokada/nanopore/image/minimap2-2.17.simg
-SCRIPT_DIR=/home/aiokada/nanopore/script
-OUTPUT_ROOT=/home/aiokada/output
-INPUT_FASTQ=/home/aiokada/guppy3.4.5/COLO829/COLO829_pass.fastq.gz
+IMAGE=/home/aokada/nanopore/image/minimap2-2.17.simg
+SCRIPT_DIR=/home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts
+OUTPUT_ROOT=/home/aokada/nanopore/output
+INPUT_FASTQ=/home/aokada/nanopore/fastq/SAMN13152502/SRR10359531.sra.fastq.gz
 
 singularity exec  \
 ${IMAGE} \

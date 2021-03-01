@@ -7,7 +7,7 @@ INPUT_FQ=$1
 OUTPUT_DIR=$2
 SAMPLE=$3
 
-REFERENCE=/home/aiokada/GRCh38.d1.vd1/GRCh38.d1.vd1.fa
+REFERENCE=/home/aokada/nanopore/database/broad/hg38/v0/Homo_sapiens_assembly38.fasta
 
 OUTPUT_BAM=${OUTPUT_DIR}/${SAMPLE}.bam
 

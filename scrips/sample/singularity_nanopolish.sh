@@ -1,23 +1,22 @@
 #!/bin/bash -x
 #$ -S /bin/bash
 #$ -cwd
-#$ -o /home/aiokada/nanopore/log/COLO829
-#$ -e /home/aiokada/nanopore/log/COLO829
-#$ -l s_vmem=2G,mem_req=2G
+#$ -o /home/aokada/nanopore/log/SAMN13152502
+#$ -e /home/aokada/nanopore/log/SAMN13152502
+#$ -l s_vmem=2G
 #$ -pe def_slot 6
-#$ -l ljob
 
 CHR=$1
-SAMPLE=COLO829
+SAMPLE=SAMN13152502
 
-IMAGE=/home/kchiba/work_directory/work_nanopore/image/nanopolish-latest.simg
-SCRIPT_DIR=/home/aiokada/nanopore/script
-OUTPUT_ROOT=/home/aiokada/output
+IMAGE=/home/aokada/nanopore/image/nanopolish-latest.simg
+SCRIPT_DIR=/home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts
+OUTPUT_ROOT=/home/aokada/nanopore/output
 
-INPUT_FAST5=/home/aiokada/guppy3.4.5/COLO829/
-INPUT_FASTQ=/home/aiokada/guppy3.4.5/COLO829/COLO829_pass.fastq.gz
+INPUT_FAST5=/home/aokada/nanopore/fast5/SAMN13152502/
+INPUT_FASTQ=/home/aokada/nanopore/fastq/SAMN13152502/SRR10359531.sra.fastq.gz
 
-singularity exec \
+singularity exec --bind /home/yuishira/genebay/ \
 ${IMAGE} \
 /bin/bash ${SCRIPT_DIR}/common/nanopolish_split.sh \
 ${INPUT_FAST5} \

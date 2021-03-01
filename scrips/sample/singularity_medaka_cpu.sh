@@ -1,18 +1,17 @@
 #!/bin/bash -x
 #$ -S /bin/bash
 #$ -cwd
-#$ -o /home/aiokada/nanopore/log/COLO829
-#$ -e /home/aiokada/nanopore/log/COLO829
-#$ -l s_vmem=16G,mem_req=16G
+#$ -o /home/aokada/nanopore/log/SAMN13152502
+#$ -e /home/aokada/nanopore/log/SAMN13152502
+#$ -l s_vmem=16G
 #$ -pe def_slot 2
-#$ -q '!mjobs_rerun.q'
 
 CHR=$1
-SAMPLE=COLO829
+SAMPLE=SAMN13152502
 
-IMAGE=/home/aiokada/nanopore/image/medaka-20201224-cpu.simg
-SCRIPT_DIR=/home/aiokada/nanopore/script
-OUTPUT_ROOT=/home/aiokada/output
+IMAGE=/home/aokada/nanopore/image/medaka-20201224-cpu.simg
+SCRIPT_DIR=/home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts
+OUTPUT_ROOT=/home/aokada/nanopore/output
 
 singularity exec  \
 ${IMAGE} \

@@ -7,7 +7,7 @@ INPUT_VCF=$1
 INPUT_BAM=$2
 OUTPUT_DIR=$3
 
-REFERENCE=/home/aiokada/GRCh38.d1.vd1/GRCh38.d1.vd1.fa
+REFERENCE=/home/aokada/nanopore/database/broad/hg38/v0/Homo_sapiens_assembly38.fasta
 
 mkdir -p ${OUTPUT_DIR}
 

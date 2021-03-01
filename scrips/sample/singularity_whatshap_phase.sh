@@ -1,16 +1,16 @@
 #!/bin/bash -x
 #$ -S /bin/bash
 #$ -cwd
-#$ -o /home/aiokada/nanopore/log/COLO829BL
-#$ -e /home/aiokada/nanopore/log/COLO829BL
-#$ -l s_vmem=16G,mem_req=16G
+#$ -o /home/aiokada/nanopore/log/SAMN13152502
+#$ -e /home/aiokada/nanopore/log/SAMN13152502
+#$ -l s_vmem=16G
 
 CHR=$1
-SAMPLE=COLO829BL
+SAMPLE=SAMN13152502
 
-IMAGE=/home/aiokada/nanopore/image/minimap2-2.17.simg
-SCRIPT_DIR=/home/aiokada/nanopore/script
-OUTPUT_ROOT=/home/aiokada/output
+IMAGE=/home/aokada/nanopore/image/minimap2-2.17.simg
+SCRIPT_DIR=/home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts
+OUTPUT_ROOT=/home/aokada/nanopore/output
 
 singularity exec  \
 ${IMAGE} \

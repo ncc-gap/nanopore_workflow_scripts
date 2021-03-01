@@ -9,7 +9,7 @@ INPUT_BAM=$3
 OUTPUT_DIR=$4
 REGION=$5
 
-REFERENCE=/home/aiokada/GRCh38.d1.vd1/GRCh38.d1.vd1.fa
+REFERENCE=/home/aokada/nanopore/database/broad/hg38/v0/Homo_sapiens_assembly38.fasta
 
 mkdir -p ${OUTPUT_DIR}
 LOCAL_FASTQ=${OUTPUT_DIR}/$(basename ${INPUT_FASTQ})
