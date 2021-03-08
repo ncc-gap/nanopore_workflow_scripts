@@ -1,13 +1,13 @@
 #!/bin/bash -x
 #$ -S /bin/bash
 #$ -cwd
-#$ -o /home/aokada/nanopore/log/SAMN13152502
-#$ -e /home/aokada/nanopore/log/SAMN13152502
+#$ -o /home/aokada/nanopore/log/ALX_201229
+#$ -e /home/aokada/nanopore/log/ALX_201229
 #$ -l s_vmem=16G
 #$ -pe def_slot 2
 
 CHR=$1
-SAMPLE=SAMN13152502
+SAMPLE=ALX_201229
 
 IMAGE=/home/aokada/nanopore/image/medaka-20201224-cpu.simg
 SCRIPT_DIR=/home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts

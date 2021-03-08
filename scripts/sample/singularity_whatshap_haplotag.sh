@@ -1,12 +1,12 @@
 #!/bin/bash -x
 #$ -S /bin/bash
 #$ -cwd
-#$ -o /home/aokada/nanopore/log/SAMN13152502
-#$ -e /home/aokada/nanopore/log/SAMN13152502
+#$ -o /home/aokada/nanopore/log/ALX_201229
+#$ -e /home/aokada/nanopore/log/ALX_201229
 #$ -l s_vmem=16G
 
-SAMPLE_TUMOR=SAMN13152502
-SAMPLE_NORMAL=SAMN13152502
+SAMPLE_TUMOR=ALX_201229
+SAMPLE_NORMAL=ALX_201229
 
 IMAGE=/home/aokada/nanopore/image/minimap2-2.17.simg
 SCRIPT_DIR=/home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts
