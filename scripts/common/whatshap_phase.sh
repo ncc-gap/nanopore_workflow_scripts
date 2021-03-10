@@ -18,6 +18,5 @@ whatshap phase \
  ${INPUT_VCF} \
  ${INPUT_BAM}
 
-rm -f ${OUTPUT_VCF}.gz
-bgzip ${OUTPUT_DIR}/phased.vcf
+bgzip -f ${OUTPUT_DIR}/phased.vcf
 tabix -p vcf ${OUTPUT_DIR}/phased.vcf.gz

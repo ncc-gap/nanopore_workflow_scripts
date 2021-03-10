@@ -1,0 +1,38 @@
+#!/bin/bash -x
+set -x
+set -o errexit
+set -o nounset
+
+INPUT_DIR=$1
+VCF_BASENAME=phased.vcf.gz
+OUTPUT_VCF=${INPUT_DIR}/phased.vcf
+
+bcftools concat \
+${INPUT_DIR}/chr1/${VCF_BASENAME} \
+${INPUT_DIR}/chr2/${VCF_BASENAME} \
+${INPUT_DIR}/chr3/${VCF_BASENAME} \
+${INPUT_DIR}/chr4/${VCF_BASENAME} \
+${INPUT_DIR}/chr5/${VCF_BASENAME} \
+${INPUT_DIR}/chr6/${VCF_BASENAME} \
+${INPUT_DIR}/chr7/${VCF_BASENAME} \
+${INPUT_DIR}/chr8/${VCF_BASENAME} \
+${INPUT_DIR}/chr9/${VCF_BASENAME} \
+${INPUT_DIR}/chr10/${VCF_BASENAME} \
+${INPUT_DIR}/chr11/${VCF_BASENAME} \
+${INPUT_DIR}/chr12/${VCF_BASENAME} \
+${INPUT_DIR}/chr13/${VCF_BASENAME} \
+${INPUT_DIR}/chr14/${VCF_BASENAME} \
+${INPUT_DIR}/chr15/${VCF_BASENAME} \
+${INPUT_DIR}/chr16/${VCF_BASENAME} \
+${INPUT_DIR}/chr17/${VCF_BASENAME} \
+${INPUT_DIR}/chr18/${VCF_BASENAME} \
+${INPUT_DIR}/chr19/${VCF_BASENAME} \
+${INPUT_DIR}/chr20/${VCF_BASENAME} \
+${INPUT_DIR}/chr21/${VCF_BASENAME} \
+${INPUT_DIR}/chr22/${VCF_BASENAME} \
+${INPUT_DIR}/chrX/${VCF_BASENAME} \
+${INPUT_DIR}/chrY/${VCF_BASENAME} \
+-o ${OUTPUT_VCF}
+
+bgzip -f ${OUTPUT_VCF}
+tabix -p vcf ${OUTPUT_VCF}.gz

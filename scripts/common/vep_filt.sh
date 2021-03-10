@@ -12,6 +12,5 @@ ${INPUT_VCF} \
 ${OUTPUT_VCF} \
 ${THRES}
 
-rm -f ${OUTPUT_VCF}.gz
-bgzip ${OUTPUT_VCF}
+bgzip -f ${OUTPUT_VCF}
 tabix -p vcf ${OUTPUT_VCF}.gz

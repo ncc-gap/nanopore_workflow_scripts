@@ -20,6 +20,5 @@ mkdir -p $(dirname ${OUTPUT_VCF})
 --custom ${GNOMAD},gnomADg,vcf,exact,0,AF,AF_eas \
 --fork 4 
 
-rm -f ${OUTPUT_VCF}.gz
-bgzip ${OUTPUT_VCF}
+bgzip -f ${OUTPUT_VCF}
 tabix -p vcf ${OUTPUT_VCF}.gz
