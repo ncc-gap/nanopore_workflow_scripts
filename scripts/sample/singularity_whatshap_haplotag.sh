@@ -3,7 +3,7 @@
 #$ -cwd
 #$ -o /home/aokada/nanopore/log/ALX_201229
 #$ -e /home/aokada/nanopore/log/ALX_201229
-#$ -l s_vmem=16G
+#$ -l s_vmem=8G
 
 SAMPLE_TUMOR=ALX_201229
 SAMPLE_NORMAL=ALX_201229

@@ -36,9 +36,6 @@ OUTPUT_ROOT="固定ならここで変えておく"
 <img src="./doc/flow.png" />
 
 ※1 guppyは終了しているものとする  
-※2 vepによるフィルタリングはまだ無い  
-※3 nanopolishの結果マージはまだ無い  
-※4 whatshap phaseの結果マージはまだ無い  
 
 1. scripts/sample ディレクトリをコピー
 
@@ -60,43 +57,10 @@ sample1_normal
  - singularity_whatshap_phase.sh
 ```
 
-2. minimap2
+3. ジョブの投入
 
-qsubで投入
-
-```
-qsub ./script/singularity_minimap2.sh
-```
-
-3. nanopolish
-
-以下で投入
+全実行
 
 ```
-bash run_nanopolish.sh
+bash run.sh
 ```
-
-4. medaka
-
-以下で投入
-
-```
-bash run_medaka_cpu.sh
-```
-
-5. whatshap phase
-
-以下で投入
-
-```
-bash run_whatshap_phase.sh
-```
-
-6. whatshap haplotag
-
-qsubで投入
-
-```
-qsub singularity_whatshap_haplotag.sh
-```
-

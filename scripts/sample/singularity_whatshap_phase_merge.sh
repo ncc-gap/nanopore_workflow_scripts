@@ -3,7 +3,7 @@
 #$ -cwd
 #$ -o /home/aokada/nanopore/log/ALX_201229
 #$ -e /home/aokada/nanopore/log/ALX_201229
-#$ -l s_vmem=8G
+#$ -l s_vmem=4G
 
 SAMPLE=ALX_201229
 

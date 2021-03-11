@@ -3,7 +3,7 @@
 #$ -cwd
 #$ -o /home/aokada/nanopore/log/ALX_201229
 #$ -e /home/aokada/nanopore/log/ALX_201229
-#$ -l s_vmem=3G
+#$ -l s_vmem=1G
 #$ -pe def_slot 4
 
 CHR=$1
