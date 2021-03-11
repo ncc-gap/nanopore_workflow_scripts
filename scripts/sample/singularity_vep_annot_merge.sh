@@ -14,6 +14,6 @@ OUTPUT_ROOT=/home/aokada/nanopore/output
 singularity exec  \
 ${IMAGE} \
 /bin/bash ${SCRIPT_DIR}/common/vcf_merge.sh \
-${OUTPUT_ROOT}/whatshap/${SAMPLE} \
-phased.vcf.gz \
-${OUTPUT_ROOT}/whatshap/phased.vcf
+${OUTPUT_ROOT}/vep/${SAMPLE} \
+round_1.vcf.gz \
+${OUTPUT_ROOT}/vep/round_1.vcf

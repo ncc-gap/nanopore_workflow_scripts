@@ -4,8 +4,10 @@ set -o errexit
 set -o nounset
 
 INPUT_DIR=$1
-VCF_BASENAME=phased.vcf.gz
-OUTPUT_VCF=${INPUT_DIR}/phased.vcf
+#VCF_BASENAME=phased.vcf.gz
+VCF_BASENAME=$2
+#OUTPUT_VCF=${INPUT_DIR}/phased.vcf
+OUTPUT_VCF=$3
 
 bcftools concat \
 ${INPUT_DIR}/chr1/${VCF_BASENAME} \

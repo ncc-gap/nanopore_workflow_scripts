@@ -87,6 +87,11 @@ qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/script
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_annot.sh chrX
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_annot.sh chrY
 
+# vep merge
+
+QSUB_OPTION="-hold_jid vep_annot_aokada_ALX_201229 -N vep_annot_merge_aokada_ALX_201229"
+qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_annot_merge.sh
+
 # vep (filter)
 
 QSUB_OPTION="-hold_jid vep_annot_aokada_ALX_201229 -N vep_filt_aokada_ALX_201229"
