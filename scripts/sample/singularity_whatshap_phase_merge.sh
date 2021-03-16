@@ -16,4 +16,4 @@ ${IMAGE} \
 /bin/bash ${SCRIPT_DIR}/common/vcf_merge.sh \
 ${OUTPUT_ROOT}/whatshap/${SAMPLE} \
 phased.vcf.gz \
-${OUTPUT_ROOT}/whatshap/phased.vcf
+${OUTPUT_ROOT}/whatshap/${SAMPLE}/phased.vcf

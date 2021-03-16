@@ -18,8 +18,8 @@ medaka_variant \
 -i ${INPUT_BAM} \
 -t 2 \
 -r ${CHR} \
--m r941_prom_high_g344 \
--s r941_prom_high_g344 \
+-m r941_prom_high_g4011 \
+-s r941_prom_high_g4011 \
 -o ${OUTPUT_DIR}
 
 bgzip ${OUTPUT_DIR}/round_1.vcf

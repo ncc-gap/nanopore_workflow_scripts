@@ -16,4 +16,4 @@ ${IMAGE} \
 /bin/bash ${SCRIPT_DIR}/common/vcf_merge.sh \
 ${OUTPUT_ROOT}/vep/${SAMPLE} \
 round_1.vcf.gz \
-${OUTPUT_ROOT}/vep/round_1.vcf
+${OUTPUT_ROOT}/vep/${SAMPLE}/round_1.vcf

@@ -1,11 +1,13 @@
+COMMON="-l gpu "
+
 # minimap2
 
-QSUB_OPTION="-N minimap2_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}" -N minimap2_aokada_ALX_201229"
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_minimap2.sh
 
 # nanopolish
 
-QSUB_OPTION="-hold_jid minimap2_aokada_ALX_201229 -N nanopolish_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}"-hold_jid minimap2_aokada_ALX_201229 -N nanopolish_aokada_ALX_201229"
 qsub /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_nanopolish.sh chr1
 qsub /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_nanopolish.sh chr2
 qsub /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_nanopolish.sh chr3
@@ -33,7 +35,7 @@ qsub /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/si
 
 # medaka
 
-QSUB_OPTION="-hold_jid minimap2_aokada_ALX_201229 -N medaka_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}"-hold_jid minimap2_aokada_ALX_201229 -N medaka_aokada_ALX_201229"
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_medaka_cpu.sh chr1
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_medaka_cpu.sh chr2
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_medaka_cpu.sh chr3
@@ -61,7 +63,7 @@ qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/script
 
 # vep (annotation)
 
-QSUB_OPTION="-hold_jid medaka_aokada_ALX_201229 -N vep_annot_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}"-hold_jid medaka_aokada_ALX_201229 -N vep_annot_aokada_ALX_201229"
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_annot.sh chr1
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_annot.sh chr2
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_annot.sh chr3
@@ -89,12 +91,12 @@ qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/script
 
 # vep merge
 
-QSUB_OPTION="-hold_jid vep_annot_aokada_ALX_201229 -N vep_annot_merge_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}"-hold_jid vep_annot_aokada_ALX_201229 -N vep_annot_merge_aokada_ALX_201229"
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_annot_merge.sh
 
 # vep (filter)
 
-QSUB_OPTION="-hold_jid vep_annot_aokada_ALX_201229 -N vep_filt_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}"-hold_jid vep_annot_aokada_ALX_201229 -N vep_filt_aokada_ALX_201229"
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_filt.sh chr1
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_filt.sh chr2
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_vep_filt.sh chr3
@@ -122,7 +124,7 @@ qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/script
 
 # whatshap phase
 
-QSUB_OPTION="-hold_jid vep_filt_aokada_ALX_201229 -N whatshap_phase_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}"-hold_jid vep_filt_aokada_ALX_201229 -N whatshap_phase_aokada_ALX_201229"
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_whatshap_phase.sh chr1
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_whatshap_phase.sh chr2
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_whatshap_phase.sh chr3
@@ -150,10 +152,10 @@ qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/script
 
 # whatshap phase merge
 
-QSUB_OPTION="-hold_jid whatshap_phase_aokada_ALX_201229 -N whatshap_phase_merge_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}"-hold_jid whatshap_phase_aokada_ALX_201229 -N whatshap_phase_merge_aokada_ALX_201229"
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_whatshap_phase_merge.sh
 
 # whatshap haplotag
 
-QSUB_OPTION="-hold_jid whatshap_phase_merge_aokada_ALX_201229 -N whatshap_haplotag_aokada_ALX_201229"
+QSUB_OPTION=${COMMON}"-hold_jid whatshap_phase_merge_aokada_ALX_201229 -N whatshap_haplotag_aokada_ALX_201229"
 qsub ${QSUB_OPTION} /home/aokada/nanopore/tools/nanopore_workflow_scripts/scripts/ALX_201229/singularity_whatshap_haplotag.sh
