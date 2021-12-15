@@ -9,7 +9,8 @@
 ```
 singularity pull docker://aokad/minimap2:2.17
 singularity pull docker://aokad/medaka:20201224-cpu
-singularity pull docker://ken01nn/nanopolish:latest
+#singularity pull docker://ken01nn/nanopolish:latest
+singularity pull docker://aokad/nanopolish:0.0.1
 singularity pull docker://aokad/ensembl-vep:20210201
 ```
 
