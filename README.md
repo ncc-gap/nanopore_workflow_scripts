@@ -34,7 +34,7 @@ OUTPUT_ROOT="固定ならここで変えておく"
 
 実行フロー
 
-<img src="./doc/flow.png" />
+![image](https://user-images.githubusercontent.com/13672949/185896507-4f7dae2e-7ce3-4d1e-b038-41643f486304.png)
 
 ※1 guppyは終了しているものとする  
 
