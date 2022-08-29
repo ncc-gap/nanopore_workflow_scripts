@@ -7,11 +7,10 @@
 2. pull singularity image
 
 ```
-singularity pull docker://aokad/minimap2:2.17
-singularity pull docker://aokad/medaka:20201224-cpu
-#singularity pull docker://ken01nn/nanopolish:latest
-singularity pull docker://aokad/nanopolish:0.0.1
-singularity pull docker://aokad/ensembl-vep:20210201
+singularity pull docker://aokad/minimap2:2.24
+singularity pull docker://aokad/medaka:20220829-cpu
+singularity pull docker://aokad/nanopolish:0.14.0
+singularity pull docker://aokad/ensembl-vep:20220216
 ```
 
 3. リファレンスゲノムをダウンロード
@@ -53,7 +52,7 @@ sample1_tumor
 sample1_normal
  - run_medaka_cpu.sh
  - run_whatshap_whase.sh
- - singularity_medaka_cpu.sh
+ - singularity_pepper.sh
  - singularity_minimap2.sh
  - singularity_whatshap_phase.sh
 ```
