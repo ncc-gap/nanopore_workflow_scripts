@@ -8,7 +8,7 @@
 
 ```
 singularity pull docker://aokad/minimap2:2.24
-#singularity pull docker://aokad/medaka:20220829-cpu
+singularity pull docker://aokad/medaka:20220829-cpu
 singularity pull docker://kishwars/pepper_deepvariant:r0.8
 singularity pull docker://aokad/nanopolish:0.14.0
 singularity pull docker://aokad/ensembl-vep:20220216
