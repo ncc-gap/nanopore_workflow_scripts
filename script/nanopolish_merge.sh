@@ -1,12 +1,9 @@
 #!/bin/bash -x
-set -x
-set -o errexit
-set -o nounset
+set -eux -o pipefail
 
 INPUT_DIR=$1
-
-BASENAME=methylation_calls.tsv
-OUTPUT_TSV=${INPUT_DIR}/${BASENAME}
+BASENAME=$2
+OUTPUT_TSV=$3
 
 head -n 1 ${INPUT_DIR}/chr1/${BASENAME} > ${OUTPUT_TSV}
 tail -n +2 ${INPUT_DIR}/chr1/${BASENAME} >> ${OUTPUT_TSV}

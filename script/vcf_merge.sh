@@ -1,13 +1,13 @@
 #!/bin/bash -x
-set -x
-set -o errexit
-set -o nounset
+set -eux -o pipefail
 
 INPUT_DIR=$1
 #VCF_BASENAME=phased.vcf.gz
 VCF_BASENAME=$2
 #OUTPUT_VCF=${INPUT_DIR}/phased.vcf
 OUTPUT_VCF=$3
+
+mkdir -p $(dirname ${OUTPUT_VCF})
 
 bcftools concat \
 ${INPUT_DIR}/chr1/${VCF_BASENAME} \

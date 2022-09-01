@@ -1,0 +1,17 @@
+pair:
+  TUMOR1: CONTROL
+  TUMOR2: CONTROL
+
+fastq:
+  TUMOR1:
+  - /home/aiokada/sandbox/nanopore_workflow_dev/data/seqtk_subseq/HUH_201229/HUH_201229.fastq.gz
+  TUMOR2:
+  - /home/aiokada/sandbox/nanopore_workflow_dev/data/seqtk_subseq/JH7_201229/JH7_201229.fastq.gz
+  CONTROL:
+  - /home/aiokada/sandbox/nanopore_workflow_dev/data/seqtk_subseq/ALX_201229/ALX_201229.fastq.gz
+
+fast5:
+  TUMOR1:
+  - /home/aiokada/sandbox/nanopore_workflow_dev/data/ont_fast5_api/HUH_201229
+  TUMOR2:
+  - /home/aiokada/sandbox/nanopore_workflow_dev/data/ont_fast5_api/JH7_201229

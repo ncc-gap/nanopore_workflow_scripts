@@ -1,17 +1,11 @@
 #!/bin/bash -x
-set -x
-set -o errexit
-set -o nounset
+set -eux -o pipefail
 
 INPUT_FQ=$1
-OUTPUT_DIR=$2
-SAMPLE=$3
+OUTPUT_BAM=$2
+REFERENCE=$3
 
-REFERENCE=/home/aokada/nanopore/database/broad/hg38/v0/Homo_sapiens_assembly38.fasta
-
-OUTPUT_BAM=${OUTPUT_DIR}/${SAMPLE}.bam
-
-mkdir -p ${OUTPUT_DIR}
+mkdir -p $(dirname ${OUTPUT_BAM})
 minimap2 \
     -ax map-ont \
     -t 8 \

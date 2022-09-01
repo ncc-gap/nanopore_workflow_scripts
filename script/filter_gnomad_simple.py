@@ -17,13 +17,22 @@ def get_info_val(infos, key, delimiter):
 
 def filter(infile, info_key, output, threas_af):
 
+    info_cols = []
+    pos_gnomadaf = -1
+
     hOUT = open(output, 'w')
     with gzip.open(infile, 'rb') as hin:
     #with open(infile, 'r') as hin:
-        for line in hin:
+        #for line in hin:
+        for raw in hin:
+            line = raw.decode()
             line = line.rstrip('\n')
             if line.startswith('#'):
                 print(line, file=hOUT)
+                if line.startswith('##INFO=<ID=%s,' % (info_key)):
+                    info_cols = line.rstrip().rstrip(">").rstrip('"').split("|")
+                    info_cols[0] = info_cols[0].split(" ")[-1]
+                    pos_gnomadaf = info_cols.index("gnomADg_AF")
                 continue
             
             F = line.split('\t')
@@ -49,13 +58,12 @@ def filter(infile, info_key, output, threas_af):
             
             for vep_annotation in l_vep_annotations:
                 l_vep_vals = vep_annotation.split('|')
-                #simpleRepeat = l_vep_vals[1]
-                simpleRepeat = ""
-                if simpleRepeat == "":
-                    gnomadaf = l_vep_vals[-2]
-                    if gnomadaf != "" and float(gnomadaf) > float(threas_af):
-                        f_print = True
-                        break
+                if len(l_vep_vals) <= pos_gnomadaf:
+                    continue
+                gnomadaf = l_vep_vals[pos_gnomadaf]
+                if gnomadaf != "" and float(gnomadaf) > float(threas_af):
+                    f_print = True
+                    break
                     
             if f_print: print(line, file=hOUT)
     hOUT.close()
@@ -73,3 +81,5 @@ if __name__ == "__main__":
     
 
     
+
+['Allele', 'Consequence', 'IMPACT', 'SYMBOL', 'Gene', 'Feature_type', 'Feature', 'BIOTYPE', 'EXON', 'INTRON', 'HGVSc', 'HGVSp', 'cDNA_position', 'CDS_position', 'Protein_position', 'Amino_acids', 'Codons', 'Existing_variation', 'ALLELE_NUM', 'DISTANCE', 'STRAND', 'FLAGS', 'MINIMISED', 'SYMBOL_SOURCE', 'HGNC_ID', 'MANE_SELECT', 'MANE_PLUS_CLINICAL', 'REFSEQ_MATCH', 'SOURCE', 'REFSEQ_OFFSET', 'GIVEN_REF', 'USED_REF', 'BAM_EDIT', 'HGVS_OFFSET', 'HGVSg', 'CLIN_SIG', 'SOMATIC', 'PHENO', 'VAR_SYNONYMS', 'gnomADg', 'gnomADg_AF', 'gnomADg_AF_eas']
