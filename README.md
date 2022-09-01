@@ -103,33 +103,33 @@ snakemake --cores 8 -k
 |   `-- sample.sh
 |-- script/
 |-- PMDV
-|   `-- JH7_201229
+|   `-- CONTROL_NAME
 |
 #   Output
 |-- log/
-|   |-- ALX_201229/
-|   `-- JH7_201229/
+|   |-- TUMOR_NAME/
+|   `-- CONTROL_NAME/
 |-- minimap2/
-|   |-- ALX_201229/
-|   `-- JH7_201229/
+|   |-- TUMOR_NAME/
+|   `-- CONTROL_NAME/
 |-- nanomonsv/
-|   |-- ALX_201229/
-|   `-- JH7_201229/
+|   |-- TUMOR_NAME/
+|   `-- CONTROL_NAME/
 |-- nanopolish
-|   `-- ALX_201229/
+|   `-- TUMOR_NAME/
 |       `-- methylation_calls.tsv.gz
 |-- vep/
-|   `-- JH7_201229/
+|   `-- CONTROL_NAME/
 |       |-- PMDV.annot.vcf.gz
 |       `-- PMDV.annot.vcf.gz.tbi
 |-- whatshap/
-|   |-- ALX_201229/
-|   |   |-- ALX_201229.bam
+|   |-- TUMOR_NAME/
+|   |   |-- TUMOR_NAME.bam
 |   |   `-- haplotag.txt
-|   `-- JH7_201229/
+|   `-- CONTROL_NAME/
 |       |-- phased.vcf.gz
 |       `-- phased.vcf.gz.tbi
 |
 `-- split/   # temporary files
-```
+
 ```
