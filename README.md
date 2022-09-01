@@ -102,8 +102,6 @@ snakemake --cores 8 -k
 |   |-- param.sh
 |   `-- sample.sh
 |-- script/
-|-- PMDV
-|   `-- CONTROL_NAME
 |
 #   Output
 |-- log/
@@ -118,6 +116,8 @@ snakemake --cores 8 -k
 |-- nanopolish
 |   `-- TUMOR_NAME/
 |       `-- methylation_calls.tsv.gz
+|-- PMDV
+|   `-- CONTROL_NAME/
 |-- vep/
 |   `-- CONTROL_NAME/
 |       |-- PMDV.annot.vcf.gz
@@ -131,5 +131,4 @@ snakemake --cores 8 -k
 |       `-- phased.vcf.gz.tbi
 |
 `-- split/   # temporary files
-
 ```
