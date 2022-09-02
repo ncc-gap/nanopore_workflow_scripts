@@ -38,7 +38,7 @@ CONF_XXX_REFERENCE=/path/to/reference.fasta
 
 ※1 guppyは終了しているものとする  
 
-1. run.sh を使用する場合
+### run.sh を使用する場合
 
 conf/sample.sh  (1ファイル1ペアのみ)
 ```
@@ -57,7 +57,7 @@ cd {this repository}
 bash run.sh conf/sample.sh
 ```
 
-2. snakemake を使用する場合
+### snakemake を使用する場合
 
 config.yml  (複数サンプル登録可能)
 ```
@@ -91,8 +91,7 @@ cd {this repository}
 snakemake --cores 8 -k
 ```
 
-## Output Directory
-
+## Output Files
 ```
 {This repository}
 #   Files originally in this repository
@@ -105,30 +104,37 @@ snakemake --cores 8 -k
 |
 #   Output
 |-- log/
-|   |-- TUMOR_NAME/
-|   `-- CONTROL_NAME/
+|   |-- CONTROL_NAME/
+|   `-- TUMOR_NAME/
 |-- minimap2/
-|   |-- TUMOR_NAME/
-|   `-- CONTROL_NAME/
+|   |-- CONTROL_NAME/
+|   |   |-- CONTROL_NAME.bam
+|   |   `-- CONTROL_NAME.bam.bai
+|   `-- TUMOR_NAME/
+|       |-- TUMOR_NAME.bam
+|       `-- TUMOR_NAME.bam.bai
 |-- nanomonsv/
-|   |-- TUMOR_NAME/
-|   `-- CONTROL_NAME/
+|   |-- CONTROL_NAME/
+|   `-- TUMOR_NAME/
+|       |-- TUMOR.nanomonsv.result.txt
+|       |-- TUMOR.nanomonsv.result.vcf
+|       |-- TUMOR.nanomonsv.sbnd.result.txt
+|       `-- TUMOR.nanomonsv.supporting_read.txt
 |-- nanopolish
 |   `-- TUMOR_NAME/
 |       `-- methylation_calls.tsv.gz
-|-- PMDV
-|   `-- CONTROL_NAME/
 |-- vep/
 |   `-- CONTROL_NAME/
 |       |-- PMDV.annot.vcf.gz
 |       `-- PMDV.annot.vcf.gz.tbi
 |-- whatshap/
-|   |-- TUMOR_NAME/
-|   |   |-- TUMOR_NAME.bam
-|   |   `-- haplotag.txt
-|   `-- CONTROL_NAME/
-|       |-- phased.vcf.gz
-|       `-- phased.vcf.gz.tbi
+|   |-- CONTROL_NAME/
+|   |   |-- phased.vcf.gz
+|   |   `-- phased.vcf.gz.tbi
+|   `-- TUMOR_NAME/
+|       |-- TUMOR_NAME.bam
+|       `-- haplotag.txt
 |
-`-- split/   # temporary files
+#   Ttemporary files
+`-- split/
 ```
