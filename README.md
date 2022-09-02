@@ -135,6 +135,6 @@ snakemake --cores 8 -k
 |       |-- TUMOR_NAME.bam
 |       `-- haplotag.txt
 |
-#   Ttemporary files
+#   Temporary files
 `-- split/
 ```
