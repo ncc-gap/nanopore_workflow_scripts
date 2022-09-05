@@ -83,6 +83,12 @@ fast5:
   - /path/to/tumor1/fast5_directory
   TUMOR_NAME2:
   - /path/to/tumor2/fast5_directory
+  TUMOR_NAME3:
+  - /path/to/tumor3/fast5_directory
+  CONTROL_NAME1:
+  - /path/to/control1/fast5_directory
+  CONTROL_NAME2:
+  - /path/to/control2/fast5_directory
 ```
 
 snakemake実行
@@ -121,6 +127,8 @@ snakemake --cores 8 -k
 |       |-- TUMOR.nanomonsv.sbnd.result.txt
 |       `-- TUMOR.nanomonsv.supporting_read.txt
 |-- nanopolish
+|   `-- CONTROL_NAME/
+|       `-- methylation_calls.tsv.gz
 |   `-- TUMOR_NAME/
 |       `-- methylation_calls.tsv.gz
 |-- vep/
@@ -130,7 +138,9 @@ snakemake --cores 8 -k
 |-- whatshap/
 |   |-- CONTROL_NAME/
 |   |   |-- phased.vcf.gz
-|   |   `-- phased.vcf.gz.tbi
+|   |   |-- phased.vcf.gz.tbi
+|   |   |-- CONTROL_NAME.bam
+|   |   `-- haplotag.txt
 |   `-- TUMOR_NAME/
 |       |-- TUMOR_NAME.bam
 |       `-- haplotag.txt
