@@ -34,7 +34,7 @@ CONF_XXX_REFERENCE=/path/to/reference.fasta
 
 実行フロー
 
-![image](https://user-images.githubusercontent.com/13672949/188038476-fbf95f94-d4c8-4e91-9f64-fdf907106e22.png)
+![image](https://user-images.githubusercontent.com/13672949/188370233-b4ae9b01-bede-4356-9462-2f32410c2b52.png)
 
 ※1 guppyは終了しているものとする  
 
