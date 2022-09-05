@@ -15,7 +15,7 @@ FAST5_DIR=$4
 
 source ./conf/param.sh
 
-INPUT_BAM=$PWD/minimap2/${SAMPLE}/${SAMPLE}.bam
+INPUT_BAM=$PWD/whatshap/${SAMPLE}/${SAMPLE}.bam
 OUTPUT_FILE=$PWD/split/nanopolish/${SAMPLE}/${CHR}/methylation_calls.tsv
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_NANOPOLISH_SINGULARITY_OPTION} \

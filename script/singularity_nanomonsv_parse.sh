@@ -11,7 +11,7 @@ SAMPLE=$1
 
 source ./conf/param.sh
 
-INPUT_BAM=$PWD/minimap2/${SAMPLE}/${SAMPLE}.bam
+INPUT_BAM=$PWD/whatshap/${SAMPLE}/${SAMPLE}.bam
 OUTPUT_PREFIX=$PWD/nanomonsv/${SAMPLE}/${SAMPLE}
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_NANOMONSV_PARSE_SINGULARITY_OPTION} \

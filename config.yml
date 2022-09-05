@@ -15,3 +15,5 @@ fast5:
   - /home/aiokada/sandbox/nanopore_workflow_dev/data/ont_fast5_api/HUH_201229
   TUMOR2:
   - /home/aiokada/sandbox/nanopore_workflow_dev/data/ont_fast5_api/JH7_201229
+  CONTROL:
+  - /home/aiokada/sandbox/nanopore_workflow_dev/data/ont_fast5_api/ALX_201229

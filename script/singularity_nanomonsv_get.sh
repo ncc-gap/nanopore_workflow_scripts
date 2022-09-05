@@ -16,9 +16,9 @@ source ./conf/param.sh
 
 CONTROL=$(basename $(dirname ${CONTROL_INPUT}))
 
-TUMOR_BAM=$PWD/minimap2/${SAMPLE}/${SAMPLE}.bam
+TUMOR_BAM=$PWD/whatshap/${SAMPLE}/${SAMPLE}.bam
 TUMOR_PREFIX=$PWD/nanomonsv/${SAMPLE}/${SAMPLE}
-CONTROL_BAM=$PWD/minimap2/${CONTROL}/${CONTROL}.bam
+CONTROL_BAM=$PWD/whatshap/${CONTROL}/${CONTROL}.bam
 CONTROL_PREFIX=$PWD/nanomonsv/${CONTROL}/${CONTROL}
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_NANOMONSV_GET_SINGULARITY_OPTION} \

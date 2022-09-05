@@ -1,13 +1,18 @@
 configfile: "config.yml"
 
-# snakemake -s ./snakefile.txt --dryrun --dag > ./dag.dot
+# snakemake --dryrun --dag > ./dag.dot
 # dot -Tpng ./dag.dot > dag.png
 
 chromosomes= 'chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22 chrX chrY'.split()
-#chromosomes= 'chr1 chr2 chr3'.split()
 
-tumors = config["pair"].keys()
+tumors = list(config["pair"].keys())
 controls = list(set(config["pair"].values()))
+samples = list(set(tumors + controls))
+pairs = {}
+for tumor in config["pair"]:
+    control = config["pair"][tumor]
+    pairs[tumor] = control
+    pairs[control] = control
 
 import os
 for tumor in tumors:
@@ -15,7 +20,6 @@ for tumor in tumors:
     os.makedirs("minimap2/" + tumor, exist_ok=True)
     os.makedirs("nanomonsv/" + tumor, exist_ok=True)
     os.makedirs("split/expand/" + tumor, exist_ok=True)
-    os.makedirs("split/whatshap/" + tumor, exist_ok=True)
     os.makedirs("split/nanopolish/" + tumor, exist_ok=True)
     os.makedirs("whatshap/" + tumor, exist_ok=True)
     os.makedirs("nanopolish/" + tumor, exist_ok=True)
@@ -27,14 +31,16 @@ for control in controls:
     os.makedirs("split/expand/" + control, exist_ok=True)
     os.makedirs("split/PMDV/" + control, exist_ok=True)
     os.makedirs("split/vep/" + control, exist_ok=True)
-    os.makedirs("PMDV/" + control, exist_ok=True)
+    os.makedirs("split/whatshap/" + tumor, exist_ok=True)
+    os.makedirs("split/nanopolish/" + tumor, exist_ok=True)
     os.makedirs("vep/" + control, exist_ok=True)
     os.makedirs("whatshap/" + control, exist_ok=True)
+    os.makedirs("nanopolish/" + tumor, exist_ok=True)
 
 rule all:
     input:
-        expand("whatshap/{sample}/haplotag.txt", sample=tumors),
-        expand("nanopolish/{sample}/methylation_calls.tsv.gz", sample=tumors),
+        expand("whatshap/{sample}/haplotag.txt", sample=samples),
+        expand("nanopolish/{sample}/methylation_calls.tsv.gz", sample=samples),
         expand("nanomonsv/{sample}/{sample}.nanomonsv.result.vcf", sample=tumors),
         expand("vep/{sample}/PMDV.annot.vcf.gz", sample=controls),
 
@@ -48,29 +54,6 @@ rule minimap2:
         qsub_option = "-N {sample}_minimap2 -e ./log/{sample} -o ./log/{sample}"
     shell:
         "qsub {params.qsub_option} -sync y {params.script} {input.fastq}"
-
-rule nanomonsv_parse:
-    input:
-        "minimap2/{sample}/{sample}.bam"
-    output:
-        "nanomonsv/{sample}/{sample}.bp_info.sorted.bed.gz"
-    params:
-        script = "script/singularity_nanomonsv_parse.sh {sample}",
-        qsub_option = "-N {sample}_nanomonsv_parse -e ./log/{sample} -o ./log/{sample}"
-    shell:
-        "qsub {params.qsub_option} -sync y {params.script}"
-
-rule nanomonsv_get:
-    input:
-        tumor = "nanomonsv/{sample}/{sample}.bp_info.sorted.bed.gz",
-        control = lambda wildcards: "nanomonsv/{control}/{control}.bp_info.sorted.bed.gz".format(control=config["pair"][wildcards.sample]),
-    output:
-        "nanomonsv/{sample}/{sample}.nanomonsv.result.vcf"
-    params:
-        script = "script/singularity_nanomonsv_get.sh {sample}",
-        qsub_option = "-N {sample}_nanomonsv_get -e ./log/{sample} -o ./log/{sample}"
-    shell:
-        "qsub {params.qsub_option} -sync y {params.script} {input.tumor} {input.control}"
 
 rule split:
     input:
@@ -149,9 +132,10 @@ rule whatshap_phase_merge:
 rule whatshap_haplotag:
     input:
         tumor= "minimap2/{sample}/{sample}.bam",
-        control= lambda wildcards: "whatshap/{control}/phased.vcf.gz".format(control=config["pair"][wildcards.sample]),
+        control= lambda wildcards: "whatshap/{control}/phased.vcf.gz".format(control=pairs[wildcards.sample]),
     output:
-        "whatshap/{sample}/haplotag.txt"
+        "whatshap/{sample}/haplotag.txt",
+        "whatshap/{sample}/{sample}.bam"
     params:
         script = "script/singularity_whatshap_haplotag.sh {sample}",
         qsub_option = "-N {sample}_whatshap_haplotag -e ./log/{sample} -o ./log/{sample}"
@@ -161,7 +145,8 @@ rule whatshap_haplotag:
 rule nanopolish:
     input:
         fastq = lambda wildcards: config["fastq"][wildcards.sample],
-        split = "split/expand/{sample}/{chr}"
+        bam = "whatshap/{sample}/{sample}.bam",
+        split = "split/expand/{sample}/{chr}",
     output:
         "split/nanopolish/{sample}/{chr}/methylation_calls.tsv"
     params:
@@ -181,3 +166,27 @@ rule nanopolish_merge:
         qsub_option = "-N {sample}_nanopolish_merge -e ./log/{sample} -o ./log/{sample}"
     shell:
         "qsub {params.qsub_option} -sync y {params.script}"
+
+rule nanomonsv_parse:
+    input:
+        "whatshap/{sample}/{sample}.bam"
+    output:
+        "nanomonsv/{sample}/{sample}.bp_info.sorted.bed.gz"
+    params:
+        script = "script/singularity_nanomonsv_parse.sh {sample}",
+        qsub_option = "-N {sample}_nanomonsv_parse -e ./log/{sample} -o ./log/{sample}"
+    shell:
+        "qsub {params.qsub_option} -sync y {params.script}"
+
+rule nanomonsv_get:
+    input:
+        tumor = "nanomonsv/{sample}/{sample}.bp_info.sorted.bed.gz",
+        control = lambda wildcards: "nanomonsv/{control}/{control}.bp_info.sorted.bed.gz".format(control=pairs[wildcards.sample]),
+    output:
+        "nanomonsv/{sample}/{sample}.nanomonsv.result.vcf"
+    params:
+        script = "script/singularity_nanomonsv_get.sh {sample}",
+        qsub_option = "-N {sample}_nanomonsv_get -e ./log/{sample} -o ./log/{sample}"
+    shell:
+        "qsub {params.qsub_option} -sync y {params.script} {input.tumor} {input.control}"
+
