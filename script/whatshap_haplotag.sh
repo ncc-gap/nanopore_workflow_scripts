@@ -16,3 +16,5 @@ whatshap haplotag \
  --output-haplotag-list ${OUTPUT_FILE} \
  ${INPUT_PHASED_VCF} \
  ${INPUT_BAM}
+
+samtools index ${OUTPUT_BAM}
