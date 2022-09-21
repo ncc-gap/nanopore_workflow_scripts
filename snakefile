@@ -48,7 +48,8 @@ rule minimap2:
     input:
         fastq = lambda wildcards: config["fastq"][wildcards.sample],
     output:
-        "minimap2/{sample}/{sample}.bam"
+        "minimap2/{sample}/{sample}.bam",
+        "minimap2/{sample}/{sample}.bam.bai"
     params:
         script = "script/singularity_minimap2.sh {sample}",
         qsub_option = "-N {sample}_minimap2 -e ./log/{sample} -o ./log/{sample}"
@@ -67,10 +68,11 @@ rule PMDV:
     input:
         "split/expand/{sample}/{chr}"
     output:
-        "split/PMDV/{sample}/{chr}/PMDV.vcf.gz"
+        "split/PMDV/{sample}/{chr}/PMDV.vcf.gz",
+        "split/PMDV/{sample}/{chr}/PMDV.vcf.gz.tbi"
     params:
         script = "script/singularity_PMDV.sh {sample} {chr}",
-        qsub_option = "-N {sample}_PMDV -e ./log/{sample} -o ./log/{sample}"
+        qsub_option = "-N {sample}_PMDV_{chr} -e ./log/{sample} -o ./log/{sample}"
     shell:
         "qsub {params.qsub_option} -sync y {params.script}"
 
@@ -78,10 +80,11 @@ rule vep_annot:
     input:
         "split/PMDV/{sample}/{chr}/PMDV.vcf.gz"
     output:
-        "split/vep/{sample}/{chr}/PMDV.annot.vcf.gz"
+        "split/vep/{sample}/{chr}/PMDV.annot.vcf.gz",
+        "split/vep/{sample}/{chr}/PMDV.annot.filt.vcf.gz.tbi"
     params:
         script = "script/singularity_vep_annot.sh {sample} {chr}",
-        qsub_option = "-N {sample}_vep_annot -e ./log/{sample} -o ./log/{sample}"
+        qsub_option = "-N {sample}_vep_annot_{chr} -e ./log/{sample} -o ./log/{sample}"
     shell:
         "qsub {params.qsub_option} -sync y {params.script}"
 
@@ -89,7 +92,8 @@ rule vep_annot_merge:
     input:
         expand("split/vep/{sample}/{chr}/PMDV.annot.vcf.gz", chr=chromosomes, allow_missing=True)
     output:
-        "vep/{sample}/PMDV.annot.vcf.gz"
+        "vep/{sample}/PMDV.annot.vcf.gz",
+        "vep/{sample}/PMDV.annot.vcf.gz.tbi"
     params:
         script = "script/singularity_vep_annot_merge.sh {sample}",
         qsub_option = "-N {sample}_vep_annot_merge -e ./log/{sample} -o ./log/{sample}"
@@ -100,10 +104,11 @@ rule vep_filt:
     input:
         "split/vep/{sample}/{chr}/PMDV.annot.vcf.gz"
     output:
-        "split/vep/{sample}/{chr}/PMDV.annot.filt.vcf.gz"
+        "split/vep/{sample}/{chr}/PMDV.annot.filt.vcf.gz",
+        "split/vep/{sample}/{chr}/PMDV.annot.filt.vcf.gz.tbi",
     params:
         script = "script/singularity_vep_filt.sh {sample} {chr}",
-        qsub_option = "-N {sample}_vep_filt -e ./log/{sample} -o ./log/{sample}"
+        qsub_option = "-N {sample}_vep_filt_{chr} -e ./log/{sample} -o ./log/{sample}"
     shell:
         "qsub {params.qsub_option} -sync y {params.script}"
 
@@ -111,10 +116,11 @@ rule whatshap_phase:
     input:
         "split/vep/{sample}/{chr}/PMDV.annot.filt.vcf.gz"
     output:
-        "split/whatshap/{sample}/{chr}/phased.vcf.gz"
+        "split/whatshap/{sample}/{chr}/phased.vcf.gz",
+        "split/whatshap/{sample}/{chr}/phased.vcf.gz.tbi"
     params:
         script = "script/singularity_whatshap_phase.sh {sample} {chr}",
-        qsub_option = "-N {sample}_whatshap_phase -e ./log/{sample} -o ./log/{sample}"
+        qsub_option = "-N {sample}_whatshap_phase_{chr} -e ./log/{sample} -o ./log/{sample}"
     shell:
         "qsub {params.qsub_option} -sync y {params.script}"
 
@@ -122,7 +128,8 @@ rule whatshap_phase_merge:
     input:
         expand("split/whatshap/{sample}/{chr}/phased.vcf.gz", chr=chromosomes, allow_missing=True)
     output:
-        "whatshap/{sample}/phased.vcf.gz"
+        "whatshap/{sample}/phased.vcf.gz",
+        "whatshap/{sample}/phased.vcf.gz.tbi"
     params:
         script = "script/singularity_whatshap_phase_merge.sh {sample}",
         qsub_option = "-N {sample}_whatshap_phase_merge -e ./log/{sample} -o ./log/{sample}"
@@ -135,26 +142,39 @@ rule whatshap_haplotag:
         control= lambda wildcards: "whatshap/{control}/phased.vcf.gz".format(control=pairs[wildcards.sample]),
     output:
         "whatshap/{sample}/haplotag.txt",
-        "whatshap/{sample}/{sample}.bam"
+        "whatshap/{sample}/{sample}.bam",
+        "whatshap/{sample}/{sample}.bam.bai"
     params:
         script = "script/singularity_whatshap_haplotag.sh {sample}",
         qsub_option = "-N {sample}_whatshap_haplotag -e ./log/{sample} -o ./log/{sample}"
     shell:
         "qsub {params.qsub_option} -sync y {params.script} {input.tumor} {input.control}"
 
-rule nanopolish:
+rule nanopolish_index:
+    input:
+        fastq = lambda wildcards: config["fastq"][wildcards.sample],
+    output:
+        "nanopolish/{sample}/index"
+    params:
+        script = "script/singularity_nanopolish_index.sh {sample}",
+        qsub_option = "-N {sample}_nanopolish_index -e ./log/{sample} -o ./log/{sample}",
+        fast5 = lambda wildcards: config["fast5"][wildcards.sample]
+    shell:
+        "qsub {params.qsub_option} -sync y {params.script} {input.fastq} {params.fast5}"
+
+rule nanopolish_methylation_calls:
     input:
         fastq = lambda wildcards: config["fastq"][wildcards.sample],
         bam = "whatshap/{sample}/{sample}.bam",
+        index = "nanopolish/{sample}/index",
         split = "split/expand/{sample}/{chr}",
     output:
         "split/nanopolish/{sample}/{chr}/methylation_calls.tsv"
     params:
-        script = "script/singularity_nanopolish.sh {sample} {chr}",
-        qsub_option = "-N {sample}_nanopolish -e ./log/{sample} -o ./log/{sample}",
-        fast5 = lambda wildcards: config["fast5"][wildcards.sample]
+        script = "script/singularity_nanopolish_methylation_calls.sh {sample} {chr}",
+        qsub_option = "-N {sample}_nanopolish_methylation_calls_{chr} -e ./log/{sample} -o ./log/{sample}",
     shell:
-        "qsub {params.qsub_option} -sync y {params.script} {input.fastq} {params.fast5}"
+        "qsub {params.qsub_option} -sync y {params.script} {input.fastq}"
 
 rule nanopolish_merge:
     input:
@@ -171,7 +191,8 @@ rule nanomonsv_parse:
     input:
         "whatshap/{sample}/{sample}.bam"
     output:
-        "nanomonsv/{sample}/{sample}.bp_info.sorted.bed.gz"
+        "nanomonsv/{sample}/{sample}.bp_info.sorted.bed.gz",
+        "nanomonsv/{sample}/{sample}.bp_info.sorted.bed.gz.tbi"
     params:
         script = "script/singularity_nanomonsv_parse.sh {sample}",
         qsub_option = "-N {sample}_nanomonsv_parse -e ./log/{sample} -o ./log/{sample}"
