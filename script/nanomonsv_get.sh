@@ -9,7 +9,7 @@ REFERENCE=$5
 CONTROL_PANEL_PREFIX=$6
 
 NANOMONSV_PARAM=""
-if [${TUMOR_BAM} != ${CONTROL_BAM} ]
+if [ ${TUMOR_BAM} != ${CONTROL_BAM} ]
 then
     NANOMONSV_PARAM="--control_prefix ${CONTROL_PREFIX} --control_bam ${CONTROL_BAM}"
 fi
