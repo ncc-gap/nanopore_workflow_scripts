@@ -20,7 +20,7 @@ OUTPUT_FILE=$PWD/split/nanopolish/${SAMPLE}/${CHR}/methylation_calls.tsv
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_NANOPOLISH_SINGULARITY_OPTION} \
     ${CONF_NANOPOLISH_IMG} \
-    /bin/bash $PWD/script/nanopolish.sh \
+    /bin/bash $PWD/script/nanopolish_methylation_calls.sh \
     ${LOCAL_FASTQ} \
     ${INPUT_BAM} \
     ${OUTPUT_FILE} \
