@@ -4,7 +4,7 @@
 #$ -o log
 #$ -e log
 #$ -j y
-#$ -l s_vmem=2G
+#$ -l s_vmem=4G
 set -eux
 
 SAMPLE=$1
