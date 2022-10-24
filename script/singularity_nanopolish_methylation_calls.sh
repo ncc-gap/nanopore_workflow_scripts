@@ -23,7 +23,7 @@ LOCAL_FASTQ=${OUTPUT_DIR}/$(basename $(ls ${INPUT_FASTQ}))
 rm -rf ${OUTPUT_DIR}
 mkdir -p ${OUTPUT_DIR}
 ln -s ${INPUT_FASTQ} ${LOCAL_FASTQ}
-cp ${LOCAL_FASTQ}.index* ${OUTPUT_DIR}/
+cp $PWD/nanopolish/${SAMPLE}/$(basename $(ls ${INPUT_FASTQ})).index* ${OUTPUT_DIR}/
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_NANOPOLISH_SINGULARITY_OPTION} \
     ${CONF_NANOPOLISH_IMG} \

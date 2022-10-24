@@ -81,7 +81,7 @@ rule vep_annot:
         "split/PMDV/{sample}/{chr}/PMDV.vcf.gz"
     output:
         "split/vep/{sample}/{chr}/PMDV.annot.vcf.gz",
-        "split/vep/{sample}/{chr}/PMDV.annot.filt.vcf.gz.tbi"
+        "split/vep/{sample}/{chr}/PMDV.annot.vcf.gz.tbi"
     params:
         script = "script/singularity_vep_annot.sh {sample} {chr}",
         qsub_option = "-N {sample}_vep_annot_{chr} -e ./log/{sample} -o ./log/{sample}"
