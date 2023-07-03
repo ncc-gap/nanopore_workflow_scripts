@@ -1,30 +1,30 @@
 # global
 CONF_SINGLARITY_PATH=singularity
-CONF_SCRIPT_PATH=/home/yosakam2/long_read_work_flow/nanopore_workflow_scripts/script
+CONF_SCRIPT_PATH=
 
 # minimap2
 
-CONF_MINIMAP2_IMG=/home/yosakam2/long_read_work_flow/sandbox/minimap2-v2.26.sif
+CONF_MINIMAP2_IMG=
 CONF_MINIMAP2_SINGULARITY_OPTION=
-CONF_MINIMAP2_REFERENCE=/home/yosakam2/long_read_work_flow/db/GRCh38.d1.vd1.fa
+CONF_MINIMAP2_REFERENCE=
 
 # nanomonsv-parse
 
-CONF_NANOMONSV_PARSE_IMG=/home/yosakam2/long_read_work_flow/sandbox/nanomonsv_v0.5.1.sif
+CONF_NANOMONSV_PARSE_IMG=
 CONF_NANOMONSV_PARSE_SINGULARITY_OPTION=
 
 # nanomonsv-get
 
-CONF_NANOMONSV_GET_IMG=/home/yosakam2/long_read_work_flow/sandbox/nanomonsv_v0.5.1.sif
+CONF_NANOMONSV_GET_IMG=
 CONF_NANOMONSV_GET_SINGULARITY_OPTION=
-CONF_NANOMONSV_GET_REFERENCE=/home/yosakam2/long_read_work_flow/db/GRCh38.d1.vd1.fa
-CONF_NANOMONSV_GET_CONTROLPANEL_PREFIX=/home/yosakam2/long_read_work_flow/db/hprc_year1_data_freeze_nanopore_minimap2_2_24_merge_control
+CONF_NANOMONSV_GET_REFERENCE=
+CONF_NANOMONSV_GET_CONTROLPANEL_PREFIX=
 
 # PMDV (PEPPER-Margin-DeepVariant)
 
-CONF_PMDV_IMG=/home/yosakam2/long_read_work_flow/sandbox/pepper_deepvariant_r0.8.sif
+CONF_PMDV_IMG=
 CONF_PMDV_SINGULARITY_OPTION=
-CONF_PMDV_REFERENCE=/home/yosakam2/long_read_work_flow/db/GRCh38.d1.vd1.fa
+CONF_PMDV_REFERENCE=
 
 #vep-annot
 
@@ -81,4 +81,4 @@ CONF_aggreaget_mpileup_GNOMAD=
 # etltools
 CONF_etltools_IMG=
 CONF_etltools_OPTION=
-CONF_etltools_REFERENCE=å
+CONF_etltools_REFERENCE=
