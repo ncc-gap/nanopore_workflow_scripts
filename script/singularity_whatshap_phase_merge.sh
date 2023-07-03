@@ -16,7 +16,7 @@ OUTPUT_VCF=$PWD/whatshap/${SAMPLE}/phased.vcf
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_WHATSHAP_PHASE_MERGE_SINGULARITY_OPTION} \
     ${CONF_WHATSHAP_PHASE_MERGE_IMG} \
-    /bin/bash $PWD/script/vcf_merge.sh \
+    /bin/bash ${CONF_SCRIPT_PATH}/vcf_merge.sh \
     ${INPUT_DIR} \
     phased.vcf.gz \
     ${OUTPUT_VCF} \

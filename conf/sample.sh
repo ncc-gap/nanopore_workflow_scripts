@@ -1,7 +1,16 @@
 PARAM_TUMOR=TUMOR
 PARAM_CONTL=CONTROL
 
-PARAM_TUMOR_FASTQ=/home/aiokada/sandbox/nanopore_workflow_dev/data/seqtk_subseq/JH7_201229/JH7_201229.fastq.gz
-PARAM_CONTL_FASTQ=/home/aiokada/sandbox/nanopore_workflow_dev/data/seqtk_subseq/ALX_201229/ALX_201229.fastq.gz
+# ONT_R9 or ONT_R10 or HiFi
+PARAM_DATA=ONT_R10
+PARAM_TUMOR_FASTQ=
+PARAM_CONTL_FASTQ=
 
-PARAM_TUMOR_FAST5=/home/aiokada/sandbox/nanopore_workflow_dev/data/ont_fast5_api/JH7_201229
+PARAM_TUMOR_BAM=
+PARAM_CONTL_BAM=
+
+# Yes or No
+METHYLATION_FLAG="Yes"
+
+
+SCRIPT=

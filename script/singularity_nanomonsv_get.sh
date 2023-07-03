@@ -23,7 +23,7 @@ CONTROL_PREFIX=$PWD/nanomonsv/${CONTROL}/${CONTROL}
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_NANOMONSV_GET_SINGULARITY_OPTION} \
     ${CONF_NANOMONSV_GET_IMG} \
-    /bin/bash $PWD/script/nanomonsv_get.sh \
+    /bin/bash ${CONF_SCRIPT_PATH}/nanomonsv_get.sh \
     ${TUMOR_BAM} \
     ${TUMOR_PREFIX} \
     ${CONTROL_BAM} \

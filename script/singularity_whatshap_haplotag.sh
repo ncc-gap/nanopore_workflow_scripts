@@ -18,7 +18,7 @@ OUTPUT_FILE=$PWD/whatshap/${SAMPLE}/haplotag.txt
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_WHATSHAP_HAPLOTAG_SINGULARITY_OPTION} \
     ${CONF_WHATSHAP_HAPLOTAG_IMG} \
-    /bin/bash $PWD/script/whatshap_haplotag.sh \
+    /bin/bash ${CONF_SCRIPT_PATH}/whatshap_haplotag.sh \
     ${CONTROL_PHASED_VCF} \
     ${TUMOR_BAM} \
     ${OUTPUT_BAM} \

@@ -16,7 +16,7 @@ OUTPUT_VCF=$PWD/vep/${SAMPLE}/PMDV.annot.vcf
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_VEP_ANNOT_MERGE_SINGULARITY_OPTION} \
     ${CONF_VEP_ANNOT_MERGE_IMG} \
-    /bin/bash $PWD/script/vcf_merge.sh \
+    /bin/bash ${CONF_SCRIPT_PATH}/vcf_merge.sh \
     ${INPUT_DIR} \
     PMDV.annot.vcf.gz \
     ${OUTPUT_VCF} \

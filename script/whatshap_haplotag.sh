@@ -10,11 +10,11 @@ REFERENCE=$5
 mkdir -p $(dirname ${OUTPUT_BAM})
 
 whatshap haplotag \
- -o ${OUTPUT_BAM} \
- --reference ${REFERENCE} \
- --ignore-read-groups \
- --output-haplotag-list ${OUTPUT_FILE} \
- ${INPUT_PHASED_VCF} \
- ${INPUT_BAM}
+    -o ${OUTPUT_BAM} \
+    --reference ${REFERENCE} \
+    --ignore-read-groups \
+    --output-haplotag-list ${OUTPUT_FILE} \
+    ${INPUT_PHASED_VCF} \
+    ${INPUT_BAM}
 
 samtools index ${OUTPUT_BAM}

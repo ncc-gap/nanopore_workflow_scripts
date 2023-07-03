@@ -10,6 +10,7 @@ set -eux
 
 SAMPLE=$1
 CHR=$2
+DATA=$3
 
 source ./conf/param.sh
 
@@ -18,8 +19,9 @@ OUTPUT_DIR=$PWD/split/PMDV/${SAMPLE}/${CHR}
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_PMDV_SINGULARITY_OPTION} \
     ${CONF_PMDV_IMG} \
-    /bin/bash $PWD/script/PMDV.sh \
+    /bin/bash ${CONF_SCRIPT_PATH}/PMDV.sh \
     ${INPUT_BAM} \
     ${OUTPUT_DIR} \
     ${CHR} \
-    ${CONF_PMDV_REFERENCE}
+    ${CONF_PMDV_REFERENCE} \
+    ${DATA}

@@ -16,6 +16,6 @@ OUTPUT_PREFIX=$PWD/nanomonsv/${SAMPLE}/${SAMPLE}
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_NANOMONSV_PARSE_SINGULARITY_OPTION} \
     ${CONF_NANOMONSV_PARSE_IMG} \
-    /bin/bash $PWD/script/nanomonsv_parse.sh \
+    /bin/bash ${CONF_SCRIPT_PATH}/nanomonsv_parse.sh \
     ${INPUT_BAM} \
     ${OUTPUT_PREFIX}

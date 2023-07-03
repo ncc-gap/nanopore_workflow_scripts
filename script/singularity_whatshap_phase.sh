@@ -18,7 +18,7 @@ OUTPUT_VCF=$PWD/split/whatshap/${SAMPLE}/${CHR}/phased.vcf
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_WHATSHAP_PHASE_SINGULARITY_OPTION} \
     ${CONF_WHATSHAP_PHASE_IMG} \
-    /bin/bash $PWD/script/whatshap_phase.sh \
+    /bin/bash ${CONF_SCRIPT_PATH}/whatshap_phase.sh \
     ${INPUT_VCF} \
     ${INPUT_BAM} \
     ${OUTPUT_VCF} \

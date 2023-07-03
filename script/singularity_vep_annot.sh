@@ -17,7 +17,7 @@ OUTPUT_VCF=$PWD/split/vep/${SAMPLE}/${CHR}/PMDV.annot.vcf
 
 ${CONF_SINGLARITY_PATH} exec ${CONF_VEP_ANNOT_SINGULARITY_OPTION} \
     ${CONF_VEP_ANNOT_IMG} \
-    /bin/bash $PWD/script/vep_annot.sh \
+    /bin/bash ${CONF_SCRIPT_PATH}/vep_annot.sh \
     ${INPUT_VCF} \
     ${OUTPUT_VCF} \
     ${CONF_VEP_ANNOT_REFERENCE} \
