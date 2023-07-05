@@ -6,14 +6,12 @@ source ${PARAM_FILE}
 mkdir -p "log/"${PARAM_TUMOR}
 mkdir -p "minimap2/"${PARAM_TUMOR}
 mkdir -p "nanomonsv/"${PARAM_TUMOR}
-#mkdir -p "split/expand/"${PARAM_TUMOR}
 mkdir -p "methylation/"${PARAM_TUMOR}
 mkdir -p "whatshap/"${PARAM_TUMOR}
 
 mkdir -p "log/"${PARAM_CONTL}
 mkdir -p "minimap2/"${PARAM_CONTL}
 mkdir -p "nanomonsv/"${PARAM_CONTL}
-#mkdir -p "split/expand/"${PARAM_CONTL}
 mkdir -p "split/PMDV/"${PARAM_CONTL}
 mkdir -p "split/vep/"${PARAM_CONTL}
 mkdir -p "split/whatshap/"${PARAM_CONTL}
@@ -23,6 +21,7 @@ mkdir -p "whatshap/"${PARAM_CONTL}
 
 QSUB_TUMOR="-e ./log/${PARAM_TUMOR} -o ./log/${PARAM_TUMOR}"
 QSUB_CONTL="-e ./log/${PARAM_CONTL} -o ./log/${PARAM_CONTL}"
+
 
 #rule minimap2:
 qsub ${QSUB_TUMOR} -N ${PARAM_TUMOR}_minimap2 ${SCRIPT}/singularity_minimap2.sh ${PARAM_TUMOR} ${PARAM_TUMOR_FASTQ} ${PARAM_DATA}
@@ -59,8 +58,6 @@ do
     fi 
 done
 
-
-
 # rule vep_annot_merge:
 qsub ${QSUB_CONTL} -N ${PARAM_CONTL}_vep_annot_merge -hold_jid ${PARAM_CONTL}_vep_annot ${SCRIPT}/singularity_vep_annot_merge.sh ${PARAM_CONTL}
 
@@ -74,7 +71,7 @@ qsub ${QSUB_TUMOR} -N ${PARAM_TUMOR}_whatshap_haplotag -hold_jid ${PARAM_CONTL}_
 if [ ${PARAM_TUMOR} != ${PARAM_CONTL} ]
 then
     INPUT_BAM=minimap2/${PARAM_CONTL}/${PARAM_CONTL}.bam
-    qsub ${QSUB_CONTL} -N ${PARAM_CONTL}_whatshap_haplotag -hold_jid ${PARAM_CONTL}_whatshap_phase_merge ${SCRIPT}/singularity_whatshap_haplotag.sh ${PARAM_TUMOR} ${INPUT_BAM} ${INPUT_PHASED}
+    qsub ${QSUB_CONTL} -N ${PARAM_CONTL}_whatshap_haplotag -hold_jid ${PARAM_CONTL}_whatshap_phase_merge ${SCRIPT}/singularity_whatshap_haplotag.sh ${PARAM_CONTL} ${INPUT_BAM} ${INPUT_PHASED}
 fi
 
 
@@ -92,7 +89,7 @@ fi
 qsub ${QSUB_TUMOR} -N ${PARAM_TUMOR}_nanomonsv_parse -hold_jid ${PARAM_TUMOR}_whatshap_haplotag ${SCRIPT}/singularity_nanomonsv_parse.sh ${PARAM_TUMOR}
 if [ ${PARAM_TUMOR} != ${PARAM_CONTL} ]
 then
-    qsub ${QSUB_CONTL} -N ${PARAM_TUMOR}_nanomonsv_parse -hold_jid ${PARAM_CONTL}_whatshap_haplotag ${SCRIPT}/singularity_nanomonsv_parse.sh ${PARAM_CONTL}
+    qsub ${QSUB_CONTL} -N ${PARAM_CONTL}_nanomonsv_parse -hold_jid ${PARAM_CONTL}_whatshap_haplotag ${SCRIPT}/singularity_nanomonsv_parse.sh ${PARAM_CONTL}
 fi
 
 # rule nanomonsv_get:

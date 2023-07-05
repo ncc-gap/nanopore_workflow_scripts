@@ -5,14 +5,23 @@ INPUT_BAM=$1
 MERGE_TAG_INPUT_BAM=$2
 OUTPUT_DIR=$3
 REF=$4
+SAMPLE=$5
 
 export_tag -i ${INPUT_BAM} -o ${OUTPUT_DIR}/
 
-merge_tag -i ${MERGE_TAG_INPUT_BAM} -t ${OUTUT_DIR}/${INPUT_BAM%.bam}_export_taginfo.txt -o ${OUTPUT_DIR}/${MERGE_TAG_INPUT_BAM%.bam}_merge_tags_sorted.bam --threads 16
+merge_tag -i ${MERGE_TAG_INPUT_BAM} -t ${OUTPUT_DIR}/*_export_taginfo.txt -o ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted.bam --threads 16
 
-split_bam -i ${OUTPUT_DIR}/${INPUT_BAM%.bam}_merge_tags_sorted.bam -o ${OUTPUT_DIR}/
+split_bam -i ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted.bam/${SAMPLE}_merge_tags_sorted.bam -o ${OUTPUT_DIR}/
 
 for hp_tag in 1 2 _none
 do
-    bash /ModbamETLTools/scripts/etl_tools/exec_bam_to_bed.sh ${OUTPUT_DIR}/${INPUT_BAM%.bam}_merge_HP${hp_tag}.bam ${REF} 16
+    /tools/modbam2bed/modbam2bed \
+        -m 5mC \
+        -e \
+        -t 8 \
+        ${REF} \
+        ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted_HP${hp_tag}.bam > ${OUTPUT_DIR}/${SAMPLE}_HP${hp_tag}.bed
+    gzip ${OUTPUT_DIR}/${SAMPLE}_HP${hp_tag}.bed
 done
+
+rm -rf ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted.bam

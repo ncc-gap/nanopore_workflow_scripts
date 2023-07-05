@@ -64,12 +64,14 @@ CONF_WHATSHAP_HAPLOTAG_REFERENCE=
 
 
 # GenomonFisher
+
 CONF_GenomonFisher_IMG=
 CONF_GenomonFisher_SINGULARITY_OPTION=
 CONF_GenomonFisher_REFERENCE=
 
 
 # aggreaget_mpileup
+
 CONF_aggregate_mpileup_IMG=
 CONF_aggreaget_mpileup_SINGULARITY_OPTION=
 CONF_aggreaget_mpileup_BLACK_LIST=
@@ -79,6 +81,7 @@ CONF_aggreaget_mpileup_ANNOTATION_HEADER=
 CONF_aggreaget_mpileup_GNOMAD=
 
 # etltools
+
 CONF_etltools_IMG=
-CONF_etltools_OPTION=
+CONF_etltools_SINGULARITY_OPTION=
 CONF_etltools_REFERENCE=

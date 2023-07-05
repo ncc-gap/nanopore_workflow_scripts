@@ -21,4 +21,5 @@ nanomonsv get \
     --processes 8 \
     --single_bnd \
     --use_racon \
+    --debug \
     --control_panel_prefix ${CONTROL_PANEL_PREFIX} ${NANOMONSV_PARAM}

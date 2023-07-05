@@ -20,3 +20,4 @@ ${CONF_SINGLARITY_PATH} exec ${CONF_VEP_FILT_SINGULARITY_OPTION} \
     /bin/bash ${CONF_SCRIPT_PATH}/vep_filt.sh \
     ${INPUT_VCF} \
     ${OUTPUT_VCF} \
+    ${CONF_SCRIPT_PATH}
