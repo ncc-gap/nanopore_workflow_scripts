@@ -21,5 +21,5 @@ nanomonsv get \
     --processes 8 \
     --single_bnd \
     --use_racon \
-    --debug \
+    --max_memory_minimap2 8 \
     --control_panel_prefix ${CONTROL_PANEL_PREFIX} ${NANOMONSV_PARAM}
