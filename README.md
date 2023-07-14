@@ -141,11 +141,31 @@ snakemake --cores 8 -k
 |       |-- TUMOR.nanomonsv.result.vcf
 |       |-- TUMOR.nanomonsv.sbnd.result.txt
 |       `-- TUMOR.nanomonsv.supporting_read.txt
-|-- nanopolish
-|   `-- CONTROL_NAME/
-|       `-- methylation_calls.tsv.gz
+|-- methylation
+|   |-- CONTROL_NAME/
+|       |-- Control.export_taginfo.txt
+|       |-- Control.export.fastq
+|       |-- Control.HP1.bam
+|       |-- Control.HP2.bam
+|       |-- Control.HP_none.bam
+|       |-- Control.HP1.bam.bai
+|       |-- Control.HP2.bam.bai
+|       |-- Control.HP_none.bam.bai
+|       |-- Control.HP1.bed.gz
+|       |-- Control.HP2.bed.gz
+|       `-- Control.HP_none.bed.gz
 |   `-- TUMOR_NAME/
-|       `-- methylation_calls.tsv.gz
+|       |-- Tumor.export_taginfo.txt
+|       |-- Tumor.export.fastq
+|       |-- Tumor.HP1.bam
+|       |-- Tumor.HP2.bam
+|       |-- Tumor.HP_none.bam
+|       |-- Tumor.HP1.bam.bai
+|       |-- Tumor.HP2.bam.bai
+|       |-- Tumor.HP_none.bam.bai
+|       |-- Tumor.HP1.bed.gz
+|       |-- Tumor.HP2.bed.gz
+|       `-- Tumor.HP_none.bed.gz
 |-- vep/
 |   `-- CONTROL_NAME/
 |       |-- PMDV.annot.vcf.gz
@@ -162,4 +182,5 @@ snakemake --cores 8 -k
 |
 #   Temporary files
 `-- split/
+|   `-- (Optional) GenomonFisher/
 ```
