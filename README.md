@@ -9,12 +9,19 @@ wget https://github.com/ncc-ccat-gap/nanopore_workflow_scripts/archive/refs/head
 unzip main.zip
 ```
 
-2. pull singularity image
+2. prepare singularity image
+- minimap2
+- nanomonsv 
+- pepper_deepvariant
+- ensembl-vep
+- whatshap
+- Genomonfisher
+- ModBamETLtools
 
 ```
 singularity pull docker://aokad/minimap2:2.24
 singularity pull docker://aokad/nanopolish:0.14.0
-singularity pull docker://friend1ws/nanomonsv:v0.5.0
+singularity pull docker://friend1ws/nanomonsv:v0.7.0b1
 singularity pull docker://kishwars/pepper_deepvariant:r0.8
 singularity pull docker://aokad/ensembl-vep:20220216
 singularity pull docker://aokad/whatshap:1.5
@@ -34,9 +41,9 @@ CONF_XXX_REFERENCE=/path/to/reference.fasta
 
 実行フロー
 
-![image](https://user-images.githubusercontent.com/13672949/188371786-7d6588d6-05e0-482a-86cf-9910b15af716.png)
+![image](image/flow.png)
 
-※1 guppyは終了しているものとする  
+※1 guppyはbasecall, modbasecallを終了しているものとする  
 
 ### run.sh を使用する場合
 
@@ -48,7 +55,14 @@ PARAM_CONTL=CONTROL_NAME
 PARAM_TUMOR_FASTQ=/path/to/tumor.fastq.gz
 PARAM_CONTL_FASTQ=/path/to/control.fastq.gz
 
-PARAM_TUMOR_FAST5=/path/to/tumor/fast5_directory
+PARAM_TUMOR_BAM=/path/to/tumor_mod.bam
+PARAM_CONTL_BAM=/path/to/normal_mod.bam
+
+# Yes or No
+METHYLATION_FLAG="Yes"
+
+
+SCRIPT=/path/to/run.sh
 ```
 
 ジョブ投入
@@ -58,6 +72,7 @@ bash run.sh conf/sample.sh
 ```
 
 ### snakemake を使用する場合
+**Snakemake-related files have not updated from the previous version, so you can use run.sh to use this pipeline**
 
 config.yml  (複数サンプル登録可能)
 ```
