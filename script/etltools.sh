@@ -7,11 +7,11 @@ OUTPUT_DIR=$3
 REF=$4
 SAMPLE=$5
 
-export_tag -i ${INPUT_BAM} -o ${OUTPUT_DIR}/
+export_tag -i ${INPUT_BAM} -o ${OUTPUT_DIR} --no_fastq
 
-merge_tag -i ${MERGE_TAG_INPUT_BAM} -t ${OUTPUT_DIR}/*_export_taginfo.txt -o ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted.bam --threads 16
+merge_tag -i ${MERGE_TAG_INPUT_BAM} -t ${OUTPUT_DIR}/*_export_taginfo.txt -o ${OUTPUT_DIR} --threads 16
 
-split_bam -i ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted.bam/${SAMPLE}_merge_tags_sorted.bam -o ${OUTPUT_DIR}/
+split_bam -i ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted.bam -o ${OUTPUT_DIR}
 
 for hp_tag in 1 2 _none
 do
@@ -24,4 +24,6 @@ do
     gzip ${OUTPUT_DIR}/${SAMPLE}_HP${hp_tag}.bed
 done
 
-rm -rf ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted.bam
+rm ${OUTPUT_DIR}/${SAMPLE}_merge_tags.bam
+rm ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted_HP*.bam
+#rm ${OUTPUT_DIR}/${SAMPLE}_merge_tags_sorted.bam
